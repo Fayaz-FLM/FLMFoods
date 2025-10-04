@@ -8,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -16,27 +15,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "restaurants")
-@Data
-@NoArgsConstructor
+@Table(name = "users")
 @AllArgsConstructor
-public class Restaurant {
-	
+@NoArgsConstructor
+@Data
+public class User {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long restaurantId;
+	private long userId;
 	
-	private String restaurantName;
+	private String userName;
 	
 	private String phoneNum;
 	
-	private double rating;
-	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
-	private Address address;
+	private List<Address> addresses;
 	
-	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-	private List<Item> items;
+	private String userEmail;
 	
+	private String password;
 }

@@ -13,29 +13,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "items")
-@Data
-@NoArgsConstructor
+@Table(name = "orderItems")
 @AllArgsConstructor
-public class Item {
+@NoArgsConstructor
+@Data
+public class OrderItem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long orderItemId;
+	
 	private long itemId;
 	
-	private String itemName;
-	
-	private double itemPrice;
-	
-	private double itemRating;
-	
-	private boolean isItemAvailable;
-	
-	private String itemType;
-	
-	private String itemCategory;
+	private int  orderItemQuantity;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "restaurant_id")
-	private Restaurant restaurant;
+	@JoinColumn(name = "order_id")
+	private Order order;
+	
 }

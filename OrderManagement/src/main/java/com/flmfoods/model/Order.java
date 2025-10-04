@@ -7,36 +7,30 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "restaurants")
-@Data
-@NoArgsConstructor
+@Table(name = "orders")
 @AllArgsConstructor
-public class Restaurant {
-	
+@NoArgsConstructor
+@Data
+public class Order {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long restaurantId;
+	private long orderId;
 	
-	private String restaurantName;
+	private long userId;
 	
-	private String phoneNum;
+	private long restaurentId;
 	
-	private double rating;
+	private String orderStatus;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id")
-	private Address address;
-	
-	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-	private List<Item> items;
-	
+	@OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+	private List<OrderItem> orderItems;
 }
