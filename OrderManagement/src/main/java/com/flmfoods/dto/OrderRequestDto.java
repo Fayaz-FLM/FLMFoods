@@ -12,7 +12,7 @@ public class OrderRequestDto {
 	
 	private long userId;
 	private long restaurantId;
-	private List<OrderItemsRequestDto> orderItemsRequestDto;
+	private List<OrderItemsDto> orderItemsDto;
 	private double price;
 
 }

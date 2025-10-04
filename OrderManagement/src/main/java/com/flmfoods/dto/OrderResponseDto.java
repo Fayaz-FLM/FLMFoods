@@ -14,6 +14,6 @@ public class OrderResponseDto {
 	private long userId;
 	private long restaurantId;
 	private String status;
-	private List<OrderItemsResponseDto> orderItemsResponseDto;
+	private List<OrderItemsDto> orderItemsDto;
 	private double price;
 }
