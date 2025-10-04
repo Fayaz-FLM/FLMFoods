@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.flm</groupId>
-	<artifactId>RestaurantManagment</artifactId>
+	<artifactId>UserManagement</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>RestaurantManagment</name>
-	<description>App to handle restaurant Information</description>
+	<name>UserManagement</name>
+	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
