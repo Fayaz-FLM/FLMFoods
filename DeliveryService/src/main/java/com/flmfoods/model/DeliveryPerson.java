@@ -14,7 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="deliveryPersons")
+@Table(name="delivery_persons")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,7 +30,7 @@ public class DeliveryPerson {
 	private boolean isAvailable;
 	private double rating;
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="deliveryPerson")
-	private List<DeliverAssaignment> deliveryAssaignments;
+	private List<DeliveryAssignment> deliveryAssignments;
 	
 	
 }

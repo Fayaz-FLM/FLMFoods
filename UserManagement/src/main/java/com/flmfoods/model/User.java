@@ -29,8 +29,7 @@ public class User {
 	private String email;
 	private String password;
 	@OneToMany
-	@JoinColumn(name="address_id")
-	private List<Address> address;
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="user")
-	private List<Order> orders;
+	@JoinColumn(name="user_address_id")
+	private List<UserAddress> userAddress;
+	
 }

@@ -15,19 +15,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="deliveryAssignments")
+@Table(name="delivery_assignments")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeliverAssaignment {
+public class DeliveryAssignment {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long deliveryAssaignmentId;
+	private long deliveryAssignmentId;
 	private String status;
 	private LocalTime assignedTime;
-	@OneToOne
-	@JoinColumn(name="order_id",nullable=false)
-	private Order order;
+	private long orderId;
 	@ManyToOne
 	@JoinColumn(name="delivery_person_id",nullable=false)
 	private DeliveryPerson deliveryPerson;

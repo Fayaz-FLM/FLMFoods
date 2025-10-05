@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="orderItems")
+@Table(name="order_items")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,9 +23,7 @@ public class OrderItem {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long orderItemId;
 	private int quantity;
-	@ManyToOne
-	@JoinColumn(name="item_id")
-	private Item item;
+	private long itemId;
 	@ManyToOne
 	@JoinColumn(name="order_id")
 	private Order order;

@@ -4,6 +4,9 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -19,15 +22,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Order {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long orderId;
 	private String status;
 	private double orderPrice;
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	private User user;
-	@ManyToOne
-	@JoinColumn(name="restaurant_id")
-	private Restaurant restaurant;
+	private long userId;
+	private long restaurantId;
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="order")
 	private List<OrderItem> orderItems;
 	
