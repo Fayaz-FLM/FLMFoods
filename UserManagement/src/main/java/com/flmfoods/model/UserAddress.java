@@ -18,7 +18,7 @@ public class UserAddress {
 		
 		@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private long useraAddressId;
+	    private long userAddressId;
 	    private String doorNo;
 	    private String street;
 	    private String landmark;
