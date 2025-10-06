@@ -27,6 +27,13 @@ public class Address {
 	private String pincode;
 	
 	private String state;
-	
 
+	public Address(String landmark, String city, String pincode, String state) {
+		super();
+		this.landmark = landmark;
+		this.city = city;
+		this.pincode = pincode;
+		this.state = state;
+	}
+	
 }
