@@ -17,8 +17,7 @@ public class ItemRequestDTO {
 	
 	private String itemType;
 	
-	private String itemCategory; //veg or non-veg
+	private String itemCategory;
 	
-	private RestaurantRequestDto restaurantRequestDto;	
 
 }

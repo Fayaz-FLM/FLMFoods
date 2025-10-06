@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ItemResponseDto {
 
+	private long itemId;
 	
 	private String itemName;
 	
