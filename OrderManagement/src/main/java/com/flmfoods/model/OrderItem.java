@@ -22,8 +22,11 @@ public class OrderItem {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long orderItemId;
+	
 	private int quantity;
+	
 	private long itemId;
+	
 	@ManyToOne
 	@JoinColumn(name="order_id")
 	private Order order;
