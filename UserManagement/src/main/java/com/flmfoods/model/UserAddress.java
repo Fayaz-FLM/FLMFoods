@@ -34,4 +34,5 @@ public class UserAddress {
 	    
 	    private String pincode;
 	    
+
 }
