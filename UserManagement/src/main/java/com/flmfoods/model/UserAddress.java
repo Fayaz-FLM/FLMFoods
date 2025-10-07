@@ -19,12 +19,20 @@ public class UserAddress {
 		@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private long userAddressId;
-	    private String doorNo;
+		
+	    private String doorNumber;
+	    
 	    private String street;
+	    
 	    private String landmark;
+	    
 	    private String city;
+	    
 	    private String district;
+	    
 	    private String state;
+	    
 	    private String pincode;
-	    private String addressType; //home or work
+	    
+
 }
