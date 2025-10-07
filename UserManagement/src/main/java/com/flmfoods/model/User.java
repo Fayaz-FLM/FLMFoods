@@ -21,15 +21,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long userId;
-	private String userName;
-	private String phoneNum;
-	private String email;
-	private String password;
-	@OneToMany
-	@JoinColumn(name="user_address_id")
-	private List<UserAddress> userAddress;
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long userId;
+
+    private String userName;
+    private String phoneNum;
+    private String email;
+    private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserAddress> userAddress;
 }
+
