@@ -17,7 +17,7 @@ import com.flmfoods.service.impl.DeliveryServiceImpl;
 public class DeliveryAssignmentController {
 	
 	@Autowired
-	DeliveryServiceImpl deliveryService;
+	DeliveryServiceImpI deliveryService;
 	
 	@PostMapping("/assignOrder")
 	public ResponseEntity<DeliveryAssignmentResponseDto> assignOrder(@RequestBody DeliveryAssignmentRequestDto deliveryAssignmentRequest){
