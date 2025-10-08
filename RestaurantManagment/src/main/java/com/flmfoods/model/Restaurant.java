@@ -39,6 +39,7 @@ public class Restaurant {
 	private Address address;
 	
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "restaurant_id")
 	private List<Item> items;
 
 	public Restaurant(String restaurantName, String phoneNum, double rating, Address address, List<Item> items) {

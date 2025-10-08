@@ -8,10 +8,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,16 +20,23 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Order {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long orderId;
+	
 	private String status;
+	
 	private double orderPrice;
+	
 	private long userId;
+	
 	private long restaurantId;
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="order")
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name = "order_id")
 	private List<OrderItem> orderItems;
 	
 	

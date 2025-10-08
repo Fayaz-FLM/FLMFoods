@@ -9,20 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.flmfoods.dto.OrderRequestDto;
 import com.flmfoods.dto.OrderResponseDto;
-import com.flmfoods.service.impl.OrderServiceImpl;
+import com.flmfoods.service.OrderService;
 
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
 	
-	private final OrderServiceImpl orderService;
+	private final OrderService orderService;
 	
-	public OrderController(OrderServiceImpl orderService) {
+	public OrderController(OrderService orderService) {
 		this.orderService = orderService;
-		
 	}
 	
-	@PostMapping("/placeOrder")
+	@PostMapping
 	public ResponseEntity<OrderResponseDto> placeOrder(@RequestBody OrderRequestDto orderRequest){
 		OrderResponseDto placedOrder = orderService.placeOrder(orderRequest);
 		return ResponseEntity.status(HttpStatus.CREATED).body(placedOrder);
