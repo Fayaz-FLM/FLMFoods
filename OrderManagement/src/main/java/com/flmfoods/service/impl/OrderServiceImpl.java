@@ -2,6 +2,7 @@ package com.flmfoods.service.impl;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.flmfoods.builder.OrderBuilder;
 import com.flmfoods.builder.OrderDTOBuilder;
@@ -15,9 +16,11 @@ import com.flmfoods.service.OrderService;
 public class OrderServiceImpl implements OrderService {
     
     private final OrderRepository orderRepository;
+    private final RestTemplate restTemplate;
     
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, RestTemplate restTemplate) {
 		this.orderRepository = orderRepository;
+		this.restTemplate = restTemplate;
 	}
 
 	@Override
@@ -27,6 +30,29 @@ public class OrderServiceImpl implements OrderService {
         
         Order savedOrder = orderRepository.save(order);
         
-        return OrderDTOBuilder.buildOrderRespDTOFromOrder(savedOrder);
+        OrderResponseDto orderResponseDto = OrderDTOBuilder.buildOrderRespDTOFromOrder(savedOrder);
+    	String restaurantName = fetchRestaurantName(order);
+    	orderResponseDto.setRestaurantName(restaurantName);
+    	return orderResponseDto;
     }
+
+	@Override
+	public OrderResponseDto updateOrderStatus(long orderId, String status) {
+		
+		Order order = orderRepository.findById(orderId)
+						.orElseThrow(() -> new IllegalArgumentException("Order Not Found with Id : "+orderId));
+		order.setStatus(status);
+		
+		orderRepository.save(order);
+		
+		OrderResponseDto orderResponseDto = OrderDTOBuilder.buildOrderRespDTOFromOrder(order);
+	    String restaurantName = fetchRestaurantName(order);
+	    orderResponseDto.setRestaurantName(restaurantName);
+		return orderResponseDto;
+	}
+	
+	private String fetchRestaurantName(Order order) {
+		String restaurantName = restTemplate.getForObject("http://localhost:8002/restaurants/name/"+order.getRestaurantId(), String.class);
+		return restaurantName;
+	}
 }

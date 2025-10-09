@@ -7,4 +7,6 @@ import com.flmfoods.dto.OrderResponseDto;
 public interface OrderService {
     
 	OrderResponseDto placeOrder(OrderRequestDto orderRequest);
+	
+	OrderResponseDto updateOrderStatus(long orderId, String status);
 }

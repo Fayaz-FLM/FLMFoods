@@ -1,17 +1,19 @@
 package com.flmfoods.service.impl;
 
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.flmfoods.dto.*;
-import com.flmfoods.model.*;
+import com.flmfoods.dao.UserAddressRepository;
+import com.flmfoods.dao.UserRepository;
+import com.flmfoods.dto.UserAddressMapper;
+import com.flmfoods.dto.UserAddressRequestDto;
+import com.flmfoods.dto.UserMapper;
+import com.flmfoods.dto.UserRequestDto;
+import com.flmfoods.dto.UserResponseDto;
+import com.flmfoods.dto.UserSignupDTO;
+import com.flmfoods.model.User;
+import com.flmfoods.model.UserAddress;
 import com.flmfoods.service.UserService;
-import com.flmfoods.dao.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,6 +25,11 @@ public class UserServiceImpl implements UserService {
     	this.userRepository = userRepository;
     	this.userAddressRepository = userAddressRepository;
     }
+    
+    public UserResponseDto signup(UserSignupDTO userSignupDTO) {
+    	
+		return null;
+	}
     
     @Override
     public UserResponseDto addUser(UserRequestDto userRequestDTO) {
@@ -42,5 +49,7 @@ public class UserServiceImpl implements UserService {
 		User savedUser = userRepository.save(userById);
 		return UserMapper.toResponseDTO(savedUser);
 	}
+
+	
 
 }

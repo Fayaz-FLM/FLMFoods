@@ -1,12 +1,16 @@
 package com.flmfoods.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.flmfoods.dto.DeliveryAssignmentRequestDto;
 import com.flmfoods.dto.DeliveryPersonRequestDto;
 import com.flmfoods.dto.DeliveryAssignmentResponseDto;
 import com.flmfoods.dto.DeliveryPersonResponseDto;
+import com.flmfoods.dto.OrderResponseDto;
 import com.flmfoods.dto.DeliveryAssignmentMapper;
 import com.flmfoods.dto.DeliveryPersonMapper;
 import com.flmfoods.model.DeliveryAssignment;
@@ -23,6 +27,9 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Autowired
     private DeliveryAssignmentRepository deliveryAssignmentRepository;
+    
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Override
     public DeliveryPersonResponseDto registerDeliveryPerson(DeliveryPersonRequestDto request) {
@@ -44,4 +51,15 @@ public class DeliveryServiceImpl implements DeliveryService {
 
         return DeliveryAssignmentMapper.toResponseDto(saved);
     }
+
+	@Override
+	public ResponseEntity<OrderResponseDto> updateOrderStatus(long orderId, String status) {
+		ResponseEntity<OrderResponseDto> orderResponseEntity = restTemplate.exchange(
+				"http://localhost:8004/orders/status/"+orderId+"?status="+status,
+				HttpMethod.PUT,
+				null,
+				OrderResponseDto.class
+				);
+		return orderResponseEntity;
+	}	
 }

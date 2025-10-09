@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.flmfoods.dto.OrderRequestDto;
+import com.flmfoods.dto.OrderResponseDto;
 import com.flmfoods.dto.RestaurantCreationResponse;
 import com.flmfoods.dto.RestaurantRequestDto;
 import com.flmfoods.dto.RestaurantResponseDto;
@@ -41,5 +43,10 @@ public class RestaurantController {
 		RestaurantResponseDto restaurantResponseDto = restaurantService.getRestaurantById(restaurantId);
 		return ResponseEntity.ok(restaurantResponseDto.getRestaurantName());
 	}
-
+	
+	@PostMapping("/order")
+	public ResponseEntity<OrderResponseDto> placeOrder(@RequestBody OrderRequestDto orderRequestDTO){
+		return restaurantService.placeOrder(orderRequestDTO);
+	}
+	
 }

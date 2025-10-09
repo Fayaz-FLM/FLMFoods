@@ -14,6 +14,7 @@ import com.flmfoods.dto.UserAddressRequestDto;
 import com.flmfoods.dto.UserAddressResponseDto;
 import com.flmfoods.dto.UserRequestDto;
 import com.flmfoods.dto.UserResponseDto;
+import com.flmfoods.dto.UserSignupDTO;
 import com.flmfoods.service.impl.UserServiceImpl;
 
 @RestController
@@ -26,9 +27,9 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@PostMapping("/add")
-	public  ResponseEntity<UserResponseDto> addUser(@RequestBody UserRequestDto userRequestDto){
-		UserResponseDto savedUserResponse = userService.addUser(userRequestDto);
+	@PostMapping("/signup")
+	public ResponseEntity<UserResponseDto> addUser(@RequestBody UserSignupDTO userSignupDTO){
+		UserResponseDto savedUserResponse = userService.signup(userSignupDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedUserResponse);
 	}
 	
