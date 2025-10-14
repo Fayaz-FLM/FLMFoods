@@ -11,10 +11,13 @@ import com.flmfoods.dto.DeliveryPersonRequestDto;
 import com.flmfoods.dto.DeliveryAssignmentResponseDto;
 import com.flmfoods.dto.DeliveryPersonResponseDto;
 import com.flmfoods.dto.OrderResponseDto;
+import com.flmfoods.dto.RestaurantCreationResponse;
+import com.flmfoods.dto.RestaurantRequestDto;
 import com.flmfoods.dto.DeliveryAssignmentMapper;
 import com.flmfoods.dto.DeliveryPersonMapper;
 import com.flmfoods.model.DeliveryAssignment;
 import com.flmfoods.model.DeliveryPerson;
+import com.flmfoods.client.RestaurantClient;
 import com.flmfoods.dao.DeliveryAssignmentRepository;
 import com.flmfoods.dao.DeliveryPersonRepository;
 import com.flmfoods.service.DeliveryService;
@@ -30,6 +33,9 @@ public class DeliveryServiceImpl implements DeliveryService {
     
     @Autowired
     private RestTemplate restTemplate;
+    
+    @Autowired
+    private RestaurantClient restaurantClient;
 
     @Override
     public DeliveryPersonResponseDto registerDeliveryPerson(DeliveryPersonRequestDto request) {
@@ -61,5 +67,16 @@ public class DeliveryServiceImpl implements DeliveryService {
 				OrderResponseDto.class
 				);
 		return orderResponseEntity;
-	}	
+	}
+	
+	@Override
+	public ResponseEntity<String> getRestaurantName(long restaurantId) {
+		return restaurantClient.getRestaurantNameById(restaurantId);
+	}
+
+	public ResponseEntity<RestaurantCreationResponse> addRestaurant(RestaurantRequestDto restaurantRequestDto) {
+		return restaurantClient.addRestaurant(restaurantRequestDto);
+	}
+	
+	
 }

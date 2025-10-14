@@ -1,5 +1,7 @@
 package com.flmfoods.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,9 @@ public class RestaurantController {
 	
 	private final RestaurantService restaurantService;
 	
+	@Autowired
+	private Environment environment;
+	
 	public RestaurantController(RestaurantService restaurantService) {
 		this.restaurantService = restaurantService;
 	}
@@ -41,7 +46,8 @@ public class RestaurantController {
 	@GetMapping("/name/{restaurantId}")
 	public ResponseEntity<String> getRestaurantNameById(@PathVariable(name = "restaurantId") long restaurantId){
 		RestaurantResponseDto restaurantResponseDto = restaurantService.getRestaurantById(restaurantId);
-		return ResponseEntity.ok(restaurantResponseDto.getRestaurantName());
+		String port = environment.getProperty("local.server.port");
+		return ResponseEntity.ok(restaurantResponseDto.getRestaurantName()+port);
 	}
 	
 	@PostMapping("/order")

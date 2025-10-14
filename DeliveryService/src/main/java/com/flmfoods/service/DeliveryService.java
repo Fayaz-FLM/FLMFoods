@@ -15,5 +15,7 @@ public interface DeliveryService {
     DeliveryAssignmentResponseDto assignOrderToDeliveryPerson(DeliveryAssignmentRequestDto request);
     
     ResponseEntity<OrderResponseDto> updateOrderStatus(long orderId, String status);
+    
+    public ResponseEntity<String> getRestaurantName(long restaurantId);
 }
 

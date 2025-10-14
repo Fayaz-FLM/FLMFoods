@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	private String fetchRestaurantName(Order order) {
-		String restaurantName = restTemplate.getForObject("http://localhost:8002/restaurants/name/"+order.getRestaurantId(), String.class);
+		String restaurantName = restTemplate.getForObject("http://RestaurantManagement/restaurants/name/"+order.getRestaurantId(), String.class);
 		return restaurantName;
 	}
 }
