@@ -12,6 +12,7 @@ import com.flmfoods.dto.OrderResponseDto;
 import com.flmfoods.dto.RestaurantCreationResponse;
 import com.flmfoods.dto.RestaurantRequestDto;
 import com.flmfoods.dto.RestaurantResponseDto;
+import com.flmfoods.exception.RestaurantIdNotFoundException;
 import com.flmfoods.model.Restaurant;
 import com.flmfoods.service.RestaurantService;
 
@@ -40,7 +41,7 @@ public class RestaurantServiceImpl implements RestaurantService{
 	public RestaurantResponseDto getRestaurantById(long restaurantId) {
 		
 		Restaurant restaurant = restaurantRepository.findById(restaurantId)
-								.orElseThrow(() -> new IllegalArgumentException("No restaurant found with Id : "+restaurantId));
+								.orElseThrow(() -> new RestaurantIdNotFoundException("No restaurant found with Id : "+restaurantId));
 		return RestaurantDTOBuilder.buildRestaurantRespDTOFromRestaurant(restaurant);
 	}
 
