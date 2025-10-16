@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+          - id: RestaurantManagement
+            uri: lb://RESTAURANTMANAGEMENT
+            predicates:
+            - Path=/restaurants/**
+          - id: OrderManagement
+            uri: lb://ORDERMANAGEMENT
+            predicates:
+            - Path=/orders/**

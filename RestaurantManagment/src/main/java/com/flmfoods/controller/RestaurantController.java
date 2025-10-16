@@ -1,6 +1,8 @@
 package com.flmfoods.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +22,24 @@ import com.flmfoods.service.RestaurantService;
 
 @RestController
 @RequestMapping("/restaurants")
+@RefreshScope
 public class RestaurantController {
 	
 	private final RestaurantService restaurantService;
+	
+	@Value("${discount.food}")
+	private int discount;
 	
 	@Autowired
 	private Environment environment;
 	
 	public RestaurantController(RestaurantService restaurantService) {
 		this.restaurantService = restaurantService;
+	}
+	
+	@GetMapping("/discount")
+	public int discount() {
+		return discount;
 	}
 	
 	@PostMapping("/add")

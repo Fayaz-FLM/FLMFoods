@@ -2,6 +2,7 @@ package com.flmfoods.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,6 +35,11 @@ public class OrderController {
 	public ResponseEntity<OrderResponseDto> updateOrderStatus(@PathVariable(name = "orderId") long orderId,@RequestParam(name = "status") String status){
 		OrderResponseDto orderResponseDto = orderService.updateOrderStatus(orderId, status);
 		return ResponseEntity.ok(orderResponseDto);
+	}
+	
+	@GetMapping("/restaurant/name/{restautrantId}")
+	public String getRestaurantName(@PathVariable(name = "restautrantId") long restautrantId) {
+		return orderService.getRestaurantName(restautrantId);
 	}
 
 }

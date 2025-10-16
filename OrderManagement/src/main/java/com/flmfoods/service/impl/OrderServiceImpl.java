@@ -12,6 +12,8 @@ import com.flmfoods.dto.OrderResponseDto;
 import com.flmfoods.model.Order;
 import com.flmfoods.service.OrderService;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 @Service
 public class OrderServiceImpl implements OrderService {
     
@@ -46,13 +48,24 @@ public class OrderServiceImpl implements OrderService {
 		orderRepository.save(order);
 		
 		OrderResponseDto orderResponseDto = OrderDTOBuilder.buildOrderRespDTOFromOrder(order);
-	    String restaurantName = fetchRestaurantName(order);
+	    String restaurantName = restTemplate.getForObject("http://RestaurantManagement/restaurants/name/"+order.getRestaurantId(), String.class);;
 	    orderResponseDto.setRestaurantName(restaurantName);
 		return orderResponseDto;
 	}
 	
-	private String fetchRestaurantName(Order order) {
+	public String fetchRestaurantName(Order order) {
 		String restaurantName = restTemplate.getForObject("http://RestaurantManagement/restaurants/name/"+order.getRestaurantId(), String.class);
 		return restaurantName;
 	}
+
+	@Override
+	@CircuitBreaker(name = "restaurantManagementCB" , fallbackMethod = "fallBackForRestaurantName")
+	public String getRestaurantName(long restautrantId) {
+		return restTemplate.getForObject("http://RestaurantManagement/restaurants/name/"+restautrantId, String.class);
+	}
+	
+	public String fallBackForRestaurantName(long restautrantId, Throwable throwable) {
+		return "Restaurant service is down";
+	}
+	
 }

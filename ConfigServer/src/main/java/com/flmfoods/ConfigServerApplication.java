@@ -2,13 +2,14 @@ package com.flmfoods;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.config.server.EnableConfigServer;
 
 @SpringBootApplication
-public class RestaurantManagmentApplication {
+@EnableConfigServer
+public class ConfigServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RestaurantManagmentApplication.class, args);
+		SpringApplication.run(ConfigServerApplication.class, args);
 	}
 
 }
-
