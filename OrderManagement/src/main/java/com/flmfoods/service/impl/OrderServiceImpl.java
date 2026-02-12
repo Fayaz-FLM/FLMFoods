@@ -9,6 +9,7 @@ import com.flmfoods.builder.OrderDTOBuilder;
 import com.flmfoods.dao.OrderRepository;
 import com.flmfoods.dto.OrderRequestDto;
 import com.flmfoods.dto.OrderResponseDto;
+import com.flmfoods.exception.OrderIdNotFoundException;
 import com.flmfoods.model.Order;
 import com.flmfoods.service.OrderService;
 
@@ -42,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
 	public OrderResponseDto updateOrderStatus(long orderId, String status) {
 		
 		Order order = orderRepository.findById(orderId)
-						.orElseThrow(() -> new IllegalArgumentException("Order Not Found with Id : "+orderId));
+						.orElseThrow(() -> new OrderIdNotFoundException("Order Not Found with Id : "+orderId));
 		order.setStatus(status);
 		
 		orderRepository.save(order);

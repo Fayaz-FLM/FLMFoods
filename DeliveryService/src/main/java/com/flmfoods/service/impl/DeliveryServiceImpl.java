@@ -13,6 +13,7 @@ import com.flmfoods.dto.DeliveryPersonResponseDto;
 import com.flmfoods.dto.OrderResponseDto;
 import com.flmfoods.dto.RestaurantCreationResponse;
 import com.flmfoods.dto.RestaurantRequestDto;
+import com.flmfoods.exception.DeliveryPersonIdNotFoundException;
 import com.flmfoods.dto.DeliveryAssignmentMapper;
 import com.flmfoods.dto.DeliveryPersonMapper;
 import com.flmfoods.model.DeliveryAssignment;
@@ -47,7 +48,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     @Override
     public DeliveryAssignmentResponseDto assignOrderToDeliveryPerson(DeliveryAssignmentRequestDto request) {
         DeliveryPerson dp = deliveryPersonRepository.findById(request.getDeliveryPersonId())
-                .orElseThrow(() -> new RuntimeException("Delivery person not found"));
+                .orElseThrow(() -> new DeliveryPersonIdNotFoundException("Delivery person not found"));
 
         DeliveryAssignment assignment = DeliveryAssignmentMapper.toEntity(request, dp);
         DeliveryAssignment saved = deliveryAssignmentRepository.save(assignment);

@@ -1,7 +1,5 @@
 package com.flmfoods.dto;
 
-import com.flmfoods.dto.DeliveryAssignmentRequestDto;
-import com.flmfoods.dto.DeliveryAssignmentResponseDto;
 import com.flmfoods.model.DeliveryAssignment;
 import com.flmfoods.model.DeliveryPerson;
 
